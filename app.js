@@ -4,12 +4,14 @@
 /* ---------------------------------------------------------
    Helpers
 --------------------------------------------------------- */
+const STAGE_PENDING_WORDS  = ["รอดำเนินการ","ยังไม่ดำเนินการ","ยังไม่มีรายงานเริ่มงาน","ยังไม่เริ่ม"];
 const STAGE_COMPLETE_WORDS = ["เสร็จ","ครบ"];
 const STAGE_PROGRESS_WORDS = ["Guide Wall","จมบ่อพัก","ผูกเหล็ก","Sheet Pile","เทคอนกรีต","ปัก Sheet"];
 const STAGE_EARLY_WORDS    = ["Test Pit","กำหนดตำแหน่ง","สำรวจ","ตัด Joint","ตัด joint","สกัด","เตรียมงาน","เติมยาง"];
 
 function classify(text){
   if(!text) return "none";
+  if(STAGE_PENDING_WORDS.some(w=>text.includes(w))) return "pending";
   if(STAGE_COMPLETE_WORDS.some(w=>text.includes(w))) return "complete";
   if(STAGE_PROGRESS_WORDS.some(w=>text.includes(w))) return "progress";
   if(STAGE_EARLY_WORDS.some(w=>text.includes(w))) return "early";
@@ -17,13 +19,13 @@ function classify(text){
 }
 
 function stageColor(stage){
-  return {complete:"var(--green)", progress:"var(--amber)", early:"var(--steel-soft)", none:"var(--grey)"}[stage];
+  return {complete:"var(--green)", progress:"var(--amber)", early:"var(--steel-soft)", pending:"var(--red)", none:"var(--grey)"}[stage];
 }
 function stageBadgeClass(stage){
-  return {complete:"badge-complete", progress:"badge-progress", early:"badge-early", none:"badge-none"}[stage];
+  return {complete:"badge-complete", progress:"badge-progress", early:"badge-early", pending:"badge-pending", none:"badge-none"}[stage];
 }
 function stageLabel(stage){
-  return {complete:"แล้วเสร็จ", progress:"กำลังดำเนินการ", early:"เตรียมการ/สำรวจ", none:"ยังไม่มีข้อมูล"}[stage];
+  return {complete:"แล้วเสร็จ", progress:"กำลังดำเนินการ", early:"เตรียมการ/สำรวจ", pending:"ยังไม่เริ่มดำเนินการ", none:"ยังไม่มีข้อมูล"}[stage];
 }
 
 function wellBaseNum(w){
@@ -317,12 +319,12 @@ function initWellsTab(){
 }
 
 const WELL_SUBTITLES = {
-  "MH.1": "ใช้วิธีก่อสร้างแบบปัก Sheet Pile — เริ่มสำรวจ 24 มี.ค. 2569 แล้วเสร็จช่วงปลายเดือนพฤษภาคม",
-  "MH.2": "ใช้วิธีก่อสร้างแบบปัก Sheet Pile — เริ่มสำรวจ 24 มี.ค. 2569 อยู่ระหว่างดำเนินการปัก Sheet Pile",
+  "MH.1": "ใช้วิธีก่อสร้างแบบปัก Sheet Pile — งานปัก Sheet Pile (กันดิน) แล้วเสร็จปลาย พ.ค. 2569 แต่ยังไม่ได้ขุดดิน ติดตั้งค้ำยัน และเทคอนกรีตพื้นบ่อ สถานะ: อยู่ระหว่างดำเนินการ",
+  "MH.2": "ใช้วิธีก่อสร้างแบบปัก Sheet Pile — เริ่มสำรวจ 24 มี.ค. 2569 อยู่ระหว่างดำเนินการปัก Sheet Pile ยังไม่เข้าสู่ขั้นขุดดิน/เทพื้นบ่อ",
   "MH.9": "ใช้วิธีก่อสร้างแบบจมบ่อพัก (Caisson) — งานโครงสร้างพื้นบ่อแล้วเสร็จ 19 มิ.ย. 2569",
   "MH.10": "ใช้วิธีก่อสร้างแบบจมบ่อพัก (Caisson) — งานโครงสร้างพื้นบ่อแล้วเสร็จ 22 มิ.ย. 2569",
   "MH.11": "ใช้วิธีก่อสร้างแบบจมบ่อพัก (Caisson) — บ่อแรกที่ดำเนินงานครบทุกขั้นตอนจนถึงงานพื้นบ่อ (3 ก.ค. 2569)",
-  "MH.12": "ใช้วิธีก่อสร้างแบบจมบ่อพัก (Caisson) — เทคอนกรีต Guide Wall ครบ 4 ด้าน และรื้อแบบหล่อแล้ว (4 ก.ค. 2569)",
+  "MH.12": "ใช้วิธีก่อสร้างแบบจมบ่อพัก (Caisson) — เทคอนกรีต Guide Wall ครบ 4 ด้าน และรื้อแบบหล่อแล้ว (4 ก.ค. 2569) ยังไม่เริ่มงานพื้นบ่อ",
 };
 
 function selectWell(name){
