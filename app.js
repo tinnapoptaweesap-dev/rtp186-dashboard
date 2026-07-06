@@ -4,6 +4,19 @@
 /* ---------------------------------------------------------
    Helpers
 --------------------------------------------------------- */
+const CATEGORY_BADGE = {
+  "รอดำเนินการ": {cls:"badge-pending", color:"var(--red)", label:"ยังไม่เริ่มดำเนินการ"},
+  "พื้นบ่อ": {cls:"badge-complete", color:"var(--green)", label:"งานพื้นบ่อ"},
+  "จมบ่อพัก": {cls:"badge-caisson", color:"var(--steel)", label:"งานจมบ่อพัก"},
+  "โครงสร้างกันดิน": {cls:"badge-progress", color:"var(--amber)", label:"โครงสร้างกันดิน"},
+  "สำรวจ": {cls:"badge-early", color:"var(--ink-faint)", label:"สำรวจ"},
+  "เตรียมการ": {cls:"badge-early", color:"var(--ink-faint)", label:"เตรียมการ"},
+  "ปรับแต่ง": {cls:"badge-early", color:"var(--ink-faint)", label:"ปรับแต่ง"},
+};
+function categoryBadge(stage){
+  return CATEGORY_BADGE[stage] || {cls:"badge-none", color:"var(--grey)", label:stage};
+}
+
 const STAGE_PENDING_WORDS  = ["รอดำเนินการ","ยังไม่ดำเนินการ","ยังไม่มีรายงานเริ่มงาน","ยังไม่เริ่ม"];
 const STAGE_COMPLETE_WORDS = ["เสร็จ","ครบ"];
 const STAGE_PROGRESS_WORDS = ["Guide Wall","จมบ่อพัก","ผูกเหล็ก","Sheet Pile","เทคอนกรีต","ปัก Sheet"];
@@ -338,13 +351,15 @@ function selectWell(name){
 
   let timelineHtml = "";
   if(curated){
-    timelineHtml = curated.map(it=>`
+    timelineHtml = curated.map(it=>{
+      const b = categoryBadge(it.stage);
+      return `
       <div class="timeline-item">
         <span class="timeline-date mono">${it.date}</span>
         <span class="timeline-text">${it.text}</span>
-        <span class="timeline-stage"><span class="badge ${stageBadgeClass(classify(it.stage))}">${it.stage}</span></span>
+        <span class="timeline-stage"><span class="badge ${b.cls}">${it.stage}</span></span>
       </div>
-    `).join("");
+    `;}).join("");
   } else if(auto.length){
     timelineHtml = auto.map(r=>`
       <div class="timeline-item">

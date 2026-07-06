@@ -194,6 +194,7 @@ main{ max-width: 1240px; margin: 0 auto; padding: 0 28px 80px; position:relative
 .badge-progress{ background: var(--amber-bg); color: var(--amber); }
 .badge-early{ background: var(--grey-bg); color: var(--ink-soft); }
 .badge-pending{ background: var(--red-bg); color: var(--red); }
+.badge-caisson{ background: #E5EEF5; color: var(--steel); }
 .badge-none{ background: var(--grey-bg); color: var(--grey); }
 
 /* ---------------- Panel head (Daily / Wells tabs) ---------------- */
