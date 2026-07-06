@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>รทป.186 — รายงานความก้าวหน้าโครงการ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">รทป<span class="brand-dot">.</span>186</span>
+      <span class="brand-sub">รายงานความก้าวหน้าโครงการ — สำหรับคณะกรรมการตรวจรับพัสดุ</span>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="overview" role="tab" aria-selected="true">ภาพรวม</button>
+      <button class="tab-btn" data-tab="daily" role="tab" aria-selected="false">รายงานรายวัน</button>
+      <button class="tab-btn" data-tab="wells" role="tab" aria-selected="false">รายบ่อพัก</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section id="tab-overview" class="tab-panel active">
+
+    <div class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">งานก่อสร้างวางท่อประปาและงานรื้อย้ายท่อประธาน · ถนนสุขุมวิท</p>
+        <h1>จากวัดชัยมงคล ถึง ซอยเทศบาลบางปู 49</h1>
+        <p class="hero-desc">สัญญา <strong>รทป.186</strong> · การประปานครหลวง (กปน.) · มูลค่าสัญญา <span class="mono">211,000,000</span> บาท · ระยะเวลาก่อสร้าง <span class="mono">540</span> วัน</p>
+        <div class="hero-meta">
+          <div class="hero-meta-item"><span class="label">เริ่มสัญญา</span><span class="value mono">3 มี.ค. 2569</span></div>
+          <div class="hero-meta-item"><span class="label">สิ้นสุดตามแผน</span><span class="value mono">24 ส.ค. 2570</span></div>
+          <div class="hero-meta-item"><span class="label">ข้อมูลยืนยันล่าสุด</span><span class="value mono" id="lastConfirmed">—</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title"><span class="section-num">01</span> แนวท่อและตำแหน่งบ่อพัก</h2>
+      <p class="section-caption">ลำดับบ่อพักตามแนวท่อจากต้นโครงการถึงปลายโครงการ — สีแสดงสถานะงานล่าสุดของแต่ละบ่อ (ประมวลผลจากคำสำคัญในรายงานหน้างาน) คลิกที่บ่อเพื่อดูรายละเอียด</p>
+      <div class="alignment-wrap">
+        <svg id="alignmentSvg" class="alignment-svg" viewBox="0 0 1200 190" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+      <div class="legend">
+        <span class="legend-item"><i class="dot dot-complete"></i>แล้วเสร็จ</span>
+        <span class="legend-item"><i class="dot dot-progress"></i>กำลังดำเนินการ</span>
+        <span class="legend-item"><i class="dot dot-early"></i>เตรียมการ / สำรวจ</span>
+        <span class="legend-item"><i class="dot dot-none"></i>ยังไม่มีข้อมูล</span>
+      </div>
+    </div>
+
+    <div class="section-block kpi-block">
+      <h2 class="section-title"><span class="section-num">02</span> ตัวชี้วัดหลัก</h2>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-label">ความก้าวหน้าสะสม (แผน)</span>
+          <span class="kpi-value mono" id="kpiPlan">—</span>
+          <span class="kpi-sub">ณ สิ้นเดือนกรกฎาคม 2569</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">ความก้าวหน้าสะสม (จริง)</span>
+          <span class="kpi-value mono" id="kpiActual">—</span>
+          <span class="kpi-sub" id="kpiDelta">—</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">วันปฏิบัติงานที่บันทึก</span>
+          <span class="kpi-value mono" id="kpiDays">—</span>
+          <span class="kpi-sub">รายการใบแจ้งขอปฏิบัติงาน</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">บ่อพักที่แล้วเสร็จ / ทั้งหมด</span>
+          <span class="kpi-value mono" id="kpiWells">—</span>
+          <span class="kpi-sub">ประมวลผลจากรายงานหน้างาน</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title"><span class="section-num">03</span> เส้นความก้าวหน้าสะสม (S-Curve)</h2>
+      <p class="section-caption">เปรียบเทียบแผนงานหลัก (Master Schedule) กับผลงานจริงสะสม หน่วยเป็นร้อยละของมูลค่างานทั้งสัญญา</p>
+      <div class="scurve-wrap">
+        <svg id="scurveSvg" class="scurve-svg" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title"><span class="section-num">04</span> เหตุการณ์ล่าสุด</h2>
+      <div id="recentList" class="recent-list"></div>
+    </div>
+
+  </section>
+
+  <!-- ============ DAILY ============ -->
+  <section id="tab-daily" class="tab-panel">
+    <div class="panel-head">
+      <h2 class="panel-title">รายงานผลการปฏิบัติงานรายวัน</h2>
+      <p class="panel-caption">เรียบเรียงจากใบแจ้งขอปฏิบัติงานและรายงานผลงานรายวัน สัญญา รทป.186</p>
+    </div>
+    <div class="filter-bar">
+      <div class="filter-item">
+        <label for="filterMonth">เดือน</label>
+        <select id="filterMonth"></select>
+      </div>
+      <div class="filter-item">
+        <label for="filterWell">บ่อพัก</label>
+        <select id="filterWell"></select>
+      </div>
+      <div class="filter-item filter-search">
+        <label for="filterSearch">ค้นหาข้อความ</label>
+        <input type="text" id="filterSearch" placeholder="เช่น Guide Wall, จมบ่อพัก">
+      </div>
+      <button id="clearFilters" class="btn-ghost">ล้างตัวกรอง</button>
+    </div>
+    <div class="table-meta"><span id="dailyCount">—</span></div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th class="col-date">วันที่</th><th class="col-wells">บ่อที่เกี่ยวข้อง</th><th>ผลงาน / กิจกรรมที่ดำเนินการ</th></tr>
+        </thead>
+        <tbody id="dailyTbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ WELLS ============ -->
+  <section id="tab-wells" class="tab-panel">
+    <div class="panel-head">
+      <h2 class="panel-title">รายละเอียดขั้นตอนแยกรายบ่อพัก</h2>
+      <p class="panel-caption">เลือกบ่อพักเพื่อดูลำดับขั้นตอนการก่อสร้างและสถานะล่าสุด</p>
+    </div>
+    <div id="wellChips" class="well-chips"></div>
+    <div id="wellDetail" class="well-detail"></div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span>จัดทำเพื่อการนำเสนอต่อคณะกรรมการตรวจรับพัสดุ · ข้อมูลเรียบเรียงจากใบแจ้งขอปฏิบัติงานและรายงานผลงานรายวัน สัญญา รทป.186</span>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
