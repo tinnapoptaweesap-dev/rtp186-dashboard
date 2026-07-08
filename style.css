@@ -242,6 +242,14 @@ main{ max-width: 1240px; margin: 0 auto; padding: 0 28px 80px; position:relative
 .cell-date{ font-family: var(--font-mono); font-weight:600; color: var(--navy-mid); white-space:nowrap; }
 .cell-wells{ display:flex; flex-wrap:wrap; gap:4px; }
 .empty-row td{ text-align:center; color: var(--ink-faint); padding: 40px 0; }
+.report-link{
+  display:inline-block; margin-inline-start:8px; white-space:nowrap;
+  font-family: var(--font-mono); font-size:.72rem; font-weight:600;
+  color: var(--steel); text-decoration:none;
+  border:1px solid var(--steel-soft); border-radius: 20px; padding: 1px 9px;
+  transition: all .12s ease;
+}
+.report-link:hover{ background: var(--steel); color:#fff; border-color: var(--steel); }
 
 /* ---------------- Wells tab ---------------- */
 .well-chips{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom: 28px; }

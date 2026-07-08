@@ -300,7 +300,7 @@ function renderDailyTable(){
     <tr class="${r.holiday?'is-holiday':''} ${r.unconfirmed?'is-unconfirmed':''}">
       <td class="cell-date">${r.date}${r.unconfirmed?' *':''}</td>
       <td><div class="cell-wells">${r.wells.map(w=>`<span class="tag tag-well" data-well="${w}">${w}</span>`).join("")}</div></td>
-      <td>${r.text}</td>
+      <td>${r.text}${r.reportUrl?` <a class="report-link" href="${r.reportUrl}" target="_blank" rel="noopener">📄 ดูใบรายงานจริง</a>`:''}</td>
     </tr>
   `).join("");
 
