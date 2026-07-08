@@ -8,23 +8,25 @@
 :root{
   /* ===== MWA Corporate Identity palette (คู่มือเอกลักษณ์ กปน.) =====
      Deep Blue #065BAA · Vivid Blue #00C2F3 · Clear Blue #ABE1FA
-     ปรับชุดสีให้ตรงตามคู่มืออัตลักษณ์องค์กร: สีองค์กรเป็นสีหลัก
-     สีสถานะ (เขียว/แดง) คงไว้เพื่อความชัดเจนของข้อมูล (สัดส่วน 30%) */
-  --navy-deep:   #044A85;   /* พื้นเข้ม hero/topbar — โทน Deep Blue เข้ม */
-  --navy:        #065BAA;   /* MWA Deep Blue — หัวข้อ */
-  --navy-mid:    #065BAA;   /* MWA Deep Blue — หัวตาราง/ไทม์ไลน์ */
-  --steel:       #0F72BE;   /* น้ำเงินกลาง — เส้นแผน S-curve, เส้นขอบเน้น */
-  --steel-soft:  #ABE1FA;   /* MWA Clear Blue — สีรองอ่อน */
-  --paper:       #F4F8FB;   /* พื้นหลังโทนฟ้าอ่อนมาก */
-  --paper-line:  #E1E9F0;
+     สีองค์กรใช้กับ: หัวข้อ, โครงสร้างหลัก, เส้นแผนงาน (~70% ตามคู่มือ)
+     สีสถานะ (ส้ม/เขียว/แดง) แยกออกจากโทนฟ้า เพื่อให้แยกสถานะได้ชัดบนพื้นสีเดียวกัน (~30% ตามคู่มือ) */
+  --navy-deep:   #044A85;
+  --navy:        #065BAA;
+  --navy-mid:    #065BAA;
+  --steel:       #0F72BE;
+  --steel-soft:  #ABE1FA;
+  --paper:       #F3F6F9;
+  --paper-line:  #DCE7F0;
   --card:        #FFFFFF;
-  --border:      #DBE6EF;
-  --ink:         #123049;   /* ดำอมน้ำเงิน อ่านง่าย */
-  --ink-soft:    #51667A;
-  --ink-faint:   #8595A6;
+  --border:      #D2E0EB;
+  --ink:         #0C2338;   /* เข้มขึ้นเพื่อ contrast ที่ดีขึ้น */
+  --ink-soft:    #3D5468;
+  --ink-faint:   #71859A;
 
-  --amber:       #00C2F3;   /* MWA Vivid Blue — สีหลัก: เส้นผลงานจริง, จุดเน้น, สถานะกำลังดำเนินการ */
-  --amber-bg:    #DFF5FE;
+  /* สถานะ "กำลังดำเนินการ" — ส้ม แยกจากโทนฟ้าโดยเจตนา เพื่อความชัดเจนของสถานะ */
+  --amber:       #E07A1F;
+  --amber-bg:    #FBEBD9;
+  --vivid:       #00C2F3;   /* MWA Vivid Blue — ใช้เป็นจุดเน้นรอง/เส้นแผนงานพิเศษ */
   --green:       #1F7A54;
   --green-bg:    #E1F1EA;
   --grey:        #93A4B4;
@@ -165,6 +167,14 @@ main{ max-width: 1240px; margin: 0 auto; padding: 0 28px 80px; position:relative
   background: var(--card); border:1px solid var(--border); border-left: 3px solid var(--steel);
   border-radius: var(--radius); padding: 20px; display:flex; flex-direction:column; gap:6px;
 }
+/* สีเน้นแยกตามความหมายของแต่ละตัวชี้วัด — ให้แยกแยะง่ายและเชื่อมโยงกับสีที่ใช้ในกราฟ */
+.kpi-card--plan{   border-left-color: var(--navy); }               /* แผน = น้ำเงิน MWA Deep Blue เหมือนเส้นแผนใน S-curve */
+.kpi-card--actual{ border-left-color: var(--amber); }              /* จริง = ส้ม เหมือนเส้นผลงานจริงใน S-curve */
+.kpi-card--actual .kpi-value{ color: var(--amber); }
+.kpi-card--days{   border-left-color: var(--vivid); }              /* วันบันทึก = ฟ้าสดใส MWA Vivid Blue */
+.kpi-card--days .kpi-value{ color: var(--vivid); }
+.kpi-card--wells{  border-left-color: var(--green); }              /* บ่อแล้วเสร็จ = เขียว เหมือนสถานะแล้วเสร็จ */
+.kpi-card--wells .kpi-value{ color: var(--green); }
 .kpi-label{ font-size:.8rem; color: var(--ink-soft); }
 .kpi-value{ font-size: 1.7rem; font-weight:600; color: var(--navy); }
 .kpi-sub{ font-size: .76rem; color: var(--ink-faint); }
