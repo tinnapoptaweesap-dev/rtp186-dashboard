@@ -9,6 +9,7 @@ const CATEGORY_BADGE = {
   "พื้นบ่อ": {cls:"badge-complete", color:"var(--green)", label:"งานพื้นบ่อ"},
   "จมบ่อพัก": {cls:"badge-caisson", color:"var(--steel)", label:"งานจมบ่อพัก"},
   "โครงสร้างกันดิน": {cls:"badge-progress", color:"var(--amber)", label:"โครงสร้างกันดิน"},
+  "Test Pit": {cls:"badge-testpit", color:"var(--testpit)", label:"Test Pit อุปสรรคใต้ดิน"},
   "สำรวจ": {cls:"badge-early", color:"var(--ink-faint)", label:"สำรวจ"},
   "เตรียมการ": {cls:"badge-early", color:"var(--ink-faint)", label:"เตรียมการ"},
   "ปรับแต่ง": {cls:"badge-early", color:"var(--ink-faint)", label:"ปรับแต่ง"},
@@ -20,25 +21,27 @@ function categoryBadge(stage){
 const STAGE_PENDING_WORDS  = ["รอดำเนินการ","ยังไม่ดำเนินการ","ยังไม่มีรายงานเริ่มงาน","ยังไม่เริ่ม"];
 const STAGE_COMPLETE_WORDS = ["เสร็จ","ครบ"];
 const STAGE_PROGRESS_WORDS = ["Guide Wall","จมบ่อพัก","ผูกเหล็ก","Sheet Pile","เทคอนกรีต","ปัก Sheet"];
-const STAGE_EARLY_WORDS    = ["Test Pit","กำหนดตำแหน่ง","สำรวจ","ตัด Joint","ตัด joint","สกัด","เตรียมงาน","เติมยาง"];
+const STAGE_TESTPIT_WORDS  = ["Test Pit","test pit"];
+const STAGE_EARLY_WORDS    = ["กำหนดตำแหน่ง","สำรวจ","ตัด Joint","ตัด joint","สกัด","เตรียมงาน","เติมยาง"];
 
 function classify(text){
   if(!text) return "none";
   if(STAGE_PENDING_WORDS.some(w=>text.includes(w))) return "pending";
   if(STAGE_COMPLETE_WORDS.some(w=>text.includes(w))) return "complete";
   if(STAGE_PROGRESS_WORDS.some(w=>text.includes(w))) return "progress";
+  if(STAGE_TESTPIT_WORDS.some(w=>text.includes(w))) return "testpit";
   if(STAGE_EARLY_WORDS.some(w=>text.includes(w))) return "early";
   return "early";
 }
 
 function stageColor(stage){
-  return {complete:"var(--green)", progress:"var(--amber)", early:"var(--steel-soft)", pending:"var(--red)", none:"var(--grey)"}[stage];
+  return {complete:"var(--green)", progress:"var(--amber)", testpit:"var(--testpit)", early:"var(--steel-soft)", pending:"var(--red)", none:"var(--grey)"}[stage];
 }
 function stageBadgeClass(stage){
-  return {complete:"badge-complete", progress:"badge-progress", early:"badge-early", pending:"badge-pending", none:"badge-none"}[stage];
+  return {complete:"badge-complete", progress:"badge-progress", testpit:"badge-testpit", early:"badge-early", pending:"badge-pending", none:"badge-none"}[stage];
 }
 function stageLabel(stage){
-  return {complete:"แล้วเสร็จ", progress:"กำลังดำเนินการ", early:"เตรียมการ/สำรวจ", pending:"ยังไม่เริ่มดำเนินการ", none:"ยังไม่มีข้อมูล"}[stage];
+  return {complete:"ก่อสร้างบ่อแล้วเสร็จ", progress:"อยู่ระหว่างก่อสร้างบ่อ", testpit:"Test Pit อุปสรรคใต้ดินแล้ว", early:"เตรียมการ/สำรวจ", pending:"ยังไม่เริ่มดำเนินการ", none:"ไม่มีข้อมูล"}[stage];
 }
 
 function wellBaseNum(w){
@@ -300,7 +303,7 @@ function renderDailyTable(){
     <tr class="${r.holiday?'is-holiday':''} ${r.unconfirmed?'is-unconfirmed':''}">
       <td class="cell-date">${r.date}${r.unconfirmed?' *':''}</td>
       <td><div class="cell-wells">${r.wells.map(w=>`<span class="tag tag-well" data-well="${w}">${w}</span>`).join("")}</div></td>
-      <td>${r.text}${r.reportUrl?` <a class="report-link" href="${r.reportUrl}" target="_blank" rel="noopener">📄 ดูใบรายงาน${r.reportPage?` (หน้า ${r.reportPage})`:'จริง'}</a>`:''}</td>
+      <td>${r.text}${r.reportUrl?` <a class="report-link" href="${r.reportUrl}" target="_blank" rel="noopener" title="${r.reportPage?`เปิดไฟล์รายเดือนแล้วไปที่หน้า ${r.reportPage}`:'เปิดใบรายงานของวันนี้'}">📄 ${r.reportPage?`ดูใบรายงาน → ไปหน้า ${r.reportPage}`:'ดูใบรายงานจริง'}</a>`:''}</td>
     </tr>
   `).join("");
 
