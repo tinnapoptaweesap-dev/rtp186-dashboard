@@ -6,25 +6,29 @@
    ========================================================= */
 
 :root{
-  --navy-deep:   #0B1F3A;
-  --navy:        #16233B;
-  --navy-mid:    #1F3864;
-  --steel:       #4C7EA8;
-  --steel-soft:  #9DBBD6;
-  --paper:       #F5F6F4;
-  --paper-line:  #E4E7E4;
+  /* ===== MWA Corporate Identity palette (คู่มือเอกลักษณ์ กปน.) =====
+     Deep Blue #065BAA · Vivid Blue #00C2F3 · Clear Blue #ABE1FA
+     ปรับชุดสีให้ตรงตามคู่มืออัตลักษณ์องค์กร: สีองค์กรเป็นสีหลัก
+     สีสถานะ (เขียว/แดง) คงไว้เพื่อความชัดเจนของข้อมูล (สัดส่วน 30%) */
+  --navy-deep:   #044A85;   /* พื้นเข้ม hero/topbar — โทน Deep Blue เข้ม */
+  --navy:        #065BAA;   /* MWA Deep Blue — หัวข้อ */
+  --navy-mid:    #065BAA;   /* MWA Deep Blue — หัวตาราง/ไทม์ไลน์ */
+  --steel:       #0F72BE;   /* น้ำเงินกลาง — เส้นแผน S-curve, เส้นขอบเน้น */
+  --steel-soft:  #ABE1FA;   /* MWA Clear Blue — สีรองอ่อน */
+  --paper:       #F4F8FB;   /* พื้นหลังโทนฟ้าอ่อนมาก */
+  --paper-line:  #E1E9F0;
   --card:        #FFFFFF;
-  --border:      #DEE3E2;
-  --ink:         #16233B;
-  --ink-soft:    #566072;
-  --ink-faint:   #8892A0;
+  --border:      #DBE6EF;
+  --ink:         #123049;   /* ดำอมน้ำเงิน อ่านง่าย */
+  --ink-soft:    #51667A;
+  --ink-faint:   #8595A6;
 
-  --amber:       #D98E04;
-  --amber-bg:    #FCF1DB;
-  --green:       #2C7A5B;
-  --green-bg:    #E3F1EA;
-  --grey:        #94A3AD;
-  --grey-bg:     #EEF1F2;
+  --amber:       #00C2F3;   /* MWA Vivid Blue — สีหลัก: เส้นผลงานจริง, จุดเน้น, สถานะกำลังดำเนินการ */
+  --amber-bg:    #DFF5FE;
+  --green:       #1F7A54;
+  --green-bg:    #E1F1EA;
+  --grey:        #93A4B4;
+  --grey-bg:     #EBF0F4;
   --red:         #B3452C;
   --red-bg:      #F8E7E1;
 
@@ -69,7 +73,10 @@ body{
   display:flex; align-items:center; justify-content:space-between; gap:24px;
   flex-wrap: wrap;
 }
-.brand{ display:flex; flex-direction:column; gap:2px; color:#fff; }
+.brand{ display:flex; flex-direction:row; align-items:center; gap:14px; color:#fff; }
+.brand-logo{ height:36px; width:auto; display:block; flex-shrink:0; background:#fff; padding:5px 8px; border-radius:5px; box-shadow:0 1px 3px rgba(0,0,0,.18); }
+.brand-text{ display:flex; flex-direction:column; gap:2px; }
+.brand-divider{ width:1px; align-self:stretch; background:rgba(255,255,255,.22); margin:2px 0; }
 .brand-mark{
   font-family: var(--font-mono); font-weight:600; font-size: 1.15rem; letter-spacing: .02em;
   color:#fff;
@@ -279,9 +286,15 @@ main{ max-width: 1240px; margin: 0 auto; padding: 0 28px 80px; position:relative
 
 /* ---------------- Footer ---------------- */
 .site-footer{
-  border-top:1px solid var(--border); padding: 24px 28px; text-align:center;
+  border-top:1px solid var(--border); padding: 24px 28px 0; text-align:center;
   color: var(--ink-faint); font-size:.78rem; position:relative; z-index:1; background: var(--paper);
 }
+.footer-slogan{
+  font-family: var(--font-thai); font-weight:600; font-size:.9rem;
+  color: var(--navy); margin: 0 0 14px; letter-spacing:.01em;
+}
+/* ลวดลายคลื่นน้ำ 3 สาย (สีองค์กร กปน.) วางด้านล่างตามคู่มือเอกลักษณ์ */
+.mwa-wave{ display:block; width:100%; height:auto; margin-top:8px; }
 
 /* ---------------- Responsive ---------------- */
 @media (max-width: 860px){
