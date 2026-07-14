@@ -51,16 +51,24 @@
 
     <div class="section-block">
       <h2 class="section-title"><span class="section-num">01</span> แนวท่อและตำแหน่งบ่อพัก</h2>
-      <p class="section-caption">ลำดับบ่อพักตามแนวท่อจากต้นโครงการถึงปลายโครงการ — สีแสดงสถานะงานล่าสุดของแต่ละบ่อ (ประมวลผลจากคำสำคัญในรายงานหน้างาน) คลิกที่บ่อเพื่อดูรายละเอียด</p>
+      <p class="section-caption">แนวท่อประธานเรียงจากต้นโครงการถึงปลายโครงการ พร้อมช่วงงานดันท่อลอดระหว่างบ่อ (ความยาวเส้นแปรผันตามระยะดันจริง) — รูปทรงบ่อบอกชนิด (คสล./Sheet Pile) · ลายเส้นบอกชนิดท่อและวิธีก่อสร้าง (RCP/SCP/ขุดเปิด) · สีบอกสถานะล่าสุด · บ่อ MH.6, MH.22, MH.27 อยู่ฝั่งขาออก เชื่อมด้วยท่อ SCP ข้ามถนน คลิกที่บ่อเพื่อดูรายละเอียด</p>
       <div class="alignment-wrap">
-        <svg id="alignmentSvg" class="alignment-svg" viewBox="0 0 1200 190" preserveAspectRatio="xMidYMid meet"></svg>
+        <svg id="alignmentSvg" class="alignment-svg" viewBox="0 0 1200 250" preserveAspectRatio="xMidYMid meet"></svg>
       </div>
       <div class="legend">
+        <span class="legend-group">ชนิดบ่อ (รูปทรง)</span>
+        <span class="legend-item"><i class="lg-sq lg-csl"></i>บ่อ คสล. (ถาวร)</span>
+        <span class="legend-item"><i class="lg-sq lg-sp"></i>บ่อ Sheet Pile (ชั่วคราว)</span>
+        <span class="legend-group">ชนิดท่อ / วิธีก่อสร้าง (ลายเส้น)</span>
+        <span class="legend-item"><i class="lg-line lg-rcp"></i>RCP · ดันท่อลอด</span>
+        <span class="legend-item"><i class="lg-line lg-scp"></i>SCP · ท่อลอด/ข้ามถนน</span>
+        <span class="legend-item"><i class="lg-line lg-open"></i>ขุดเปิดหน้าดิน (MH.22→22/2)</span>
+        <span class="legend-group">สถานะ (สี)</span>
         <span class="legend-item"><i class="dot dot-complete"></i>ก่อสร้างบ่อแล้วเสร็จ</span>
-        <span class="legend-item"><i class="dot dot-progress"></i>อยู่ระหว่างก่อสร้างบ่อ</span>
+        <span class="legend-item"><i class="dot dot-progress"></i>อยู่ระหว่างก่อสร้าง</span>
         <span class="legend-item"><i class="dot dot-testpit"></i>Test Pit อุปสรรคใต้ดินแล้ว</span>
         <span class="legend-item"><i class="dot dot-early"></i>เตรียมการ/สำรวจ</span>
-        <span class="legend-item"><i class="dot dot-none"></i>ไม่มีข้อมูล</span>
+        <span class="legend-item"><i class="dot dot-none"></i>ยังไม่เริ่ม/ไม่มีข้อมูล</span>
       </div>
     </div>
 

@@ -33,6 +33,7 @@
   --grey-bg:     #EBF0F4;
   --red:         #B3452C;
   --red-bg:      #F8E7E1;
+  --scp:         #D23B2A;   /* ท่อ SCP (Steel Cylinder Pipe) — แดง แยกจากท่อ RCP ตามแบบสัญญา */
   --testpit:     #FFEB3B;   /* Test Pit / อุปสรรคใต้ดิน — เหลืองแท้ล้วน ไม่ผสมส้ม/ทอง แยกชัดจากสีส้ม(กำลังดำเนินการ) */
   --testpit-bg:  #FFF9C4;   /* พื้นหลัง badge เหลืองอ่อน คู่กับตัวอักษรสีเข้ม (ink) */
 
@@ -154,7 +155,7 @@ main{ max-width: 1240px; margin: 0 auto; padding: 0 28px 80px; position:relative
   background: var(--card); border:1px solid var(--border); border-radius: var(--radius);
   padding: 8px 12px 0; margin-bottom: 16px; overflow-x:auto;
 }
-.alignment-svg{ width:100%; min-width: 900px; height:auto; display:block; }
+.alignment-svg{ width:100%; min-width: 1040px; height:auto; display:block; }
 .legend{ display:flex; gap:22px; flex-wrap:wrap; font-size:.82rem; color: var(--ink-soft); margin-bottom: 8px;}
 .legend-item{ display:flex; align-items:center; gap:7px; }
 .dot{ width:10px; height:10px; border-radius:50%; display:inline-block; box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); }
@@ -163,6 +164,16 @@ main{ max-width: 1240px; margin: 0 auto; padding: 0 28px 80px; position:relative
 .dot-early{ background: var(--steel-soft); }
 .dot-testpit{ background: var(--testpit); }
 .dot-none{ background: var(--grey); }
+/* legend groups + shape/line swatches (แนวท่อ: ชนิดบ่อ + ชนิดท่อ/วิธี) */
+.legend-group{ width:100%; font-weight:600; color: var(--navy); font-size:.76rem; margin-top:6px; }
+.lg-sq{ width:12px; height:12px; border-radius:2px; display:inline-block; flex-shrink:0; }
+.lg-csl{ background:#fff; border:2.4px solid var(--navy-deep); }
+.lg-sp{ background:#fff; border:1.6px dashed var(--ink-faint); }
+.lg-sub{ background:#FBEE9C; border:1.4px solid #C9B04A; }
+.lg-line{ width:26px; height:0; display:inline-block; flex-shrink:0; }
+.lg-rcp{ border-top:3px solid var(--ink-soft); }
+.lg-scp{ border-top:3px solid var(--scp); }
+.lg-open{ border-top:3px dotted var(--ink-soft); }
 
 /* ---------------- KPI ---------------- */
 .kpi-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; }

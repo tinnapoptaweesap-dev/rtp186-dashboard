@@ -104,42 +104,93 @@ function renderHeroMeta(){
 /* ---------------------------------------------------------
    Alignment strip (signature visual)
 --------------------------------------------------------- */
+// สถานะช่วงดันท่อ (override รายช่วง key = บ่อต้นทาง) — default "none" เพราะงานดันท่อยังไม่เริ่ม
+function segStatus(fromW){
+  return (DATA.segmentStatus && DATA.segmentStatus[fromW]) || "none";
+}
+
 function renderAlignmentStrip(){
   const svg = document.getElementById("alignmentSvg");
-  const wells = [];
-  for(let n=1;n<=27;n++) wells.push("MH."+n);
+  const net = DATA.network;
+  if(!net){ svg.innerHTML=""; return; }
 
-  const W = 1200, H = 190, padX = 40, y = 90;
-  const step = (W - padX*2) / (wells.length - 1);
+  const W = 1200, padX = 54;
+  const yMain = 205, sq = 15, sqSub = 10, pipeTh = 3.2;
+  const SUB_FILL = "#FBEE9C", SUB_STROKE = "#C9B04A", SUB_INK = "#8A7420";
+  const SCP = "#D23B2A", OPEN_INK = "#3D5468";
+
+  // สเกล √ ร่วมทุกทิศ (px ต่อ √เมตร) — ช่วงสั้นยังอ่านได้ ไม่จมช่วงยาว
+  const dists = net.main.slice(0,-1).map(m=>m.distTo);
+  const roots = dists.map(Math.sqrt);
+  const sum = roots.reduce((a,b)=>a+b,0);
+  const availW = W - padX*2 - 30;
+  const k = availW / sum;
+  const toPx = m => Math.sqrt(m)*k;
+  const crossPx = Math.max(toPx(net.crossLen || 40), 42);
+  const yBranch = yMain - sq - crossPx;
+
+  // ตำแหน่ง x ตามระยะดันสะสม
+  const X = {}; let x = padX + 20;
+  net.main.forEach((m,i)=>{ X[m.w]=x; if(i<net.main.length-1) x += roots[i]*k; });
+
+  function wellRect(cx,cy,s,fill,type,label,clickWell){
+    let stroke, sw, dash="";
+    if(type==="sub"){ stroke=SUB_STROKE; sw=1.4; fill=SUB_FILL; }
+    else if(type==="csl"){ stroke="var(--navy-deep)"; sw=2.6; }
+    else { stroke="var(--ink-faint)"; sw=1.6; dash='stroke-dasharray="2.5 2"'; }
+    const g0 = clickWell ? `<g class="mh-marker" data-well="${clickWell}" style="cursor:pointer" tabindex="0" role="button" aria-label="${label}">` : `<g>`;
+    return `${g0}<rect x="${cx-s/2}" y="${cy-s/2}" width="${s}" height="${s}" rx="2.4" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" ${dash}/><title>${label}</title></g>`;
+  }
 
   let html = "";
-  // base line
-  html += `<line x1="${padX}" y1="${y}" x2="${W-padX}" y2="${y}" stroke="var(--border)" stroke-width="3"/>`;
-  html += `<text x="${padX}" y="${y-28}" font-family="IBM Plex Mono" font-size="11" fill="var(--ink-faint)">ต้นโครงการ (วัดชัยมงคล)</text>`;
-  html += `<text x="${W-padX}" y="${y-28}" text-anchor="end" font-family="IBM Plex Mono" font-size="11" fill="var(--ink-faint)">ปลายโครงการ (ซอยเทศบาลบางปู 49)</text>`;
+  html += `<text x="${padX}" y="22" font-family="IBM Plex Mono" font-size="11" fill="var(--ink-faint)">ต้นโครงการ (วัดชัยมงคล)</text>`;
+  html += `<text x="${W-padX}" y="22" text-anchor="end" font-family="IBM Plex Mono" font-size="11" fill="var(--ink-faint)">ปลายโครงการ (ซอยเทศบาลบางปู 49)</text>`;
+  html += `<text x="${padX}" y="${yBranch-20}" font-family="IBM Plex Sans Thai" font-size="10.5" fill="var(--ink-soft)" font-weight="600">ฝั่งขาออก (branch)</text>`;
 
-  wells.forEach((w,i)=>{
-    const cx = padX + step*i;
-    const stage = wellStatus(w);
-    const color = stageColor(stage);
-    const featured = !!DATA.curated[w];
-    const r = featured ? 9 : 6;
-    const labelY = (i % 2 === 0) ? y - 20 : y + 34;
-    const lineY2 = (i % 2 === 0) ? y - 12 : y + 12;
-    html += `<line x1="${cx}" y1="${y}" x2="${cx}" y2="${lineY2}" stroke="${color}" stroke-width="1.5" opacity=".6"/>`;
-    html += `<g class="mh-marker" data-well="${w}" style="cursor:pointer" tabindex="0" role="button" aria-label="${w} ${stageLabel(stage)}">
-      <circle cx="${cx}" cy="${y}" r="${r}" fill="${color}" stroke="#fff" stroke-width="2"/>
-      <text x="${cx}" y="${labelY}" text-anchor="middle" font-family="IBM Plex Mono" font-size="${featured?12:10}" font-weight="${featured?700:500}" fill="var(--navy)">${w.replace('MH.','')}</text>
-    </g>`;
+  // ── ช่วงท่อแนวประธาน (สี = สถานะช่วง, เลข = ระยะดันจริง) ──
+  for(let i=0;i<net.main.length-1;i++){
+    const a=net.main[i], b=net.main[i+1];
+    const x1=X[a.w]+sq/2+3, x2=X[b.w]-sq/2-3;
+    const color=stageColor(segStatus(a.w));
+    const isSCP=a.pipe==="scp";
+    html += `<line x1="${x1}" y1="${yMain}" x2="${x2}" y2="${yMain}" stroke="${color}" stroke-width="${pipeTh}"><title>${a.w} → ${b.w} · ${isSCP?'SCP':'RCP'} · ดันท่อลอด ${a.distTo} ม. · ${stageLabel(segStatus(a.w))}</title></line>`;
+    const mx=(X[a.w]+X[b.w])/2;
+    html += `<text x="${mx}" y="${yMain+24}" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="var(--ink-soft)">${a.distTo}</text>`;
+    if(isSCP) html += `<text x="${mx}" y="${yMain-9}" text-anchor="middle" font-family="IBM Plex Mono" font-size="7.5" fill="${SCP}" font-weight="700">SCP</text>`;
+  }
+
+  // ── tie-in บนแนวประธาน: ไม่วาดสี่เหลี่ยม (เลี่ยงสับสนกับสีเหลือง Test Pit) — คงข้อมูลไว้ใน DATA.network ──
+
+
+  // ── branch ฝั่งขาออก (SCP ข้ามถนน ≈40 ม.) ──
+  net.branches.forEach(br=>{
+    const cx=X[br.junction]; if(cx==null) return;
+    const color=stageColor(wellStatus(br.w));
+    html+=`<line x1="${cx}" y1="${yMain-sq/2}" x2="${cx}" y2="${yBranch+sq/2}" stroke="${SCP}" stroke-width="2.4" stroke-dasharray="4 3"/>`;
+    html+=`<text x="${cx+5}" y="${(yMain+yBranch)/2+2}" font-family="IBM Plex Mono" font-size="7.5" fill="${SCP}" font-weight="700">SCP</text>`;
+    html+=wellRect(cx,yBranch,sq,color,br.type,br.w+" · "+br.size+" · "+stageLabel(wellStatus(br.w)),br.w);
+    html+=`<text x="${cx}" y="${yBranch-sq/2-6}" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" font-weight="700" fill="var(--navy)">${br.w.replace('MH.','')}</text>`;
+    // tie-in ข้างบ่อ branch: ไม่วาดสี่เหลี่ยม (เลี่ยงสับสนกับสีเหลือง Test Pit)
+    if(br.open){
+      const oLen=toPx(br.open.len);
+      const ox=cx-sq/2-oLen;
+      html+=`<line x1="${cx-sq/2}" y1="${yBranch}" x2="${ox}" y2="${yBranch}" stroke="${OPEN_INK}" stroke-width="2.8" stroke-dasharray="1.5 2.5"/>`;
+      html+=`<circle cx="${ox}" cy="${yBranch}" r="2.6" fill="${OPEN_INK}"><title>${br.open.w} · ตัดบรรจบ (ปลายงานขุดเปิด)</title></circle>`;
+      html+=`<text x="${(cx-sq/2+ox)/2}" y="${yBranch-8}" text-anchor="middle" font-family="IBM Plex Sans Thai" font-size="7.5" fill="${OPEN_INK}" font-weight="600">ขุดเปิด ${br.open.len}ม.</text>`;
+    }
+  });
+
+  // ── บ่อแนวประธาน (วาดบนสุด) ──
+  net.main.forEach(m=>{
+    const cx=X[m.w];
+    html+=wellRect(cx,yMain,sq,stageColor(wellStatus(m.w)),m.type,m.w+" · "+m.size+" · "+stageLabel(wellStatus(m.w)),m.w);
+    html+=`<text x="${cx}" y="${yMain-sq/2-6}" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" font-weight="700" fill="var(--navy)">${m.w.replace('MH.','')}</text>`;
   });
 
   svg.innerHTML = html;
   svg.querySelectorAll(".mh-marker").forEach(g=>{
     g.addEventListener("click", ()=> window.goToWellsTab(g.dataset.well));
     g.addEventListener("keypress", (e)=>{ if(e.key==="Enter") window.goToWellsTab(g.dataset.well); });
-    const title = document.createElementNS("http://www.w3.org/2000/svg","title");
-    title.textContent = g.dataset.well + " — " + stageLabel(wellStatus(g.dataset.well));
-    g.appendChild(title);
   });
 }
 
