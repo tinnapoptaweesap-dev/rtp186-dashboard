@@ -204,13 +204,43 @@ function renderKPIs(){
   const cumActual = actual.reduce((a,b)=>a+b, 0);
 
   document.getElementById("kpiPlan").textContent = cumPlan.toFixed(2) + "%";
+  const planSub = document.getElementById("kpiPlanSub");
+  if(planSub){
+    const lb = (DATA.scurve.labels||[])[actual.length-1];
+    planSub.textContent = lb ? ("ณ สิ้นเดือน " + lb + " 2569") : "ณ สิ้นเดือนล่าสุด";
+  }
   document.getElementById("kpiActual").textContent = cumActual.toFixed(2) + "%";
   const delta = cumActual - cumPlan;
   const deltaEl = document.getElementById("kpiDelta");
   deltaEl.textContent = (delta>=0? "เร็วกว่าแผน " : "ล่าช้ากว่าแผน ") + Math.abs(delta).toFixed(2) + "%";
   deltaEl.style.color = delta>=0 ? "var(--green)" : "var(--red)";
 
-  document.getElementById("kpiDays").textContent = DATA.daily.filter(d=>!d.unconfirmed).length + " วัน";
+  /* วันที่ที่ % ผลงานจริงถูกวัด — แจ้งเป็นครั้ง ๆ จากงวดงาน ไม่ใช่วันที่ของบันทึกประจำวัน */
+  const asOfEl = document.getElementById("kpiActualAsOf");
+  if(asOfEl){
+    const TH = ["","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+    const a = DATA.meta.actualAsOf;
+    if(a){
+      const [yy,mm,dd] = a.split("-").map(Number);
+      asOfEl.textContent = "ความก้าวหน้าถึงวันที่ " + dd + " " + TH[mm] + " " + yy;
+      asOfEl.style.color = "var(--ink-soft)";
+    } else {
+      asOfEl.textContent = "ยังไม่ระบุวันที่วัดผลงาน";
+      asOfEl.style.color = "var(--red)";
+    }
+  }
+
+  /* วันตามสัญญาที่ล่วงไปแล้ว — นับรวมวันหยุดและวันที่ไม่มีรายงาน
+     ฐาน: meta.startDate (3 มี.ค. 2569) ถึงวันที่ข้อมูลล่าสุด / meta.durationDays (540 วัน) */
+  const beToDate = iso => { const [y,m,dd] = iso.split("-").map(Number);
+                            return new Date(Date.UTC(y-543, m-1, dd)); };
+  const cStart   = beToDate(DATA.meta.startDate);
+  const cNow     = beToDate(DATA.daily[DATA.daily.length-1].iso);
+  const cTotal   = DATA.meta.durationDays;
+  const cElapsed = Math.min(cTotal, Math.round((cNow - cStart)/86400000) + 1);
+  document.getElementById("kpiDays").textContent = cElapsed + " / " + cTotal + " วัน";
+  const daysSub = document.getElementById("kpiDaysSub");
+  if(daysSub) daysSub.textContent = "ล่วงไปแล้ว " + (cElapsed/cTotal*100).toFixed(1) + "% ของอายุสัญญา";
 
   let complete=0, total=0;
   for(let n=1;n<=27;n++){

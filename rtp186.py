@@ -123,6 +123,7 @@ def digest(d, tag="DIGEST"):
     sc = d["scurve"]
     out.append(f"plan cum (to now)  : {round(sum(sc['planMonthly'][:len(sc['actualMonthly'])]),2)}%")
     out.append(f"actual cum         : {round(sum(sc['actualMonthly']),2)}%")
+    out.append(f"actual as-of       : {d['meta'].get('actualAsOf','** ยังไม่ระบุ **')}")
     out.append(f"variance           : {round(sum(sc['actualMonthly'])-sum(sc['planMonthly'][:len(sc['actualMonthly'])]),2)}%")
     return "\n".join(out)
 
@@ -176,6 +177,9 @@ def cmd_patch(a):
     if delta.get("actualMonthly"):
         d["scurve"]["actualMonthly"] = delta["actualMonthly"]
         log.append("  SCURVE actualMonthly updated")
+    if delta.get("actualAsOf"):
+        d["meta"]["actualAsOf"] = delta["actualAsOf"]
+        log.append(f"  META actualAsOf -> {delta['actualAsOf']}")
 
     # ---- meta
     last = d["daily"][-1]["iso"]
