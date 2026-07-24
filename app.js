@@ -215,7 +215,7 @@ function renderKPIs(){
   let complete=0, total=0;
   for(let n=1;n<=27;n++){
     const st = wellStatus("MH."+n);
-    if(st !== "none") total++;
+    total++;                       // นับตามขอบเขตสัญญาเสมอ (ตัวหารคงที่ 27 บ่อ)
     if(st === "complete") complete++;
   }
   document.getElementById("kpiWells").textContent = complete + " / " + total;
