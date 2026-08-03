@@ -1,0 +1,29 @@
+{
+  "confirmed": "2 สิงหาคม 2569",
+  "note": "อัพเดต 186 — ยืนยันผล 31/07-02/08 (MH.24: ตัดJoint→สกัดพื้นเปลี่ยนฝา→TestPit→ตัดJointกำหนดตำแหน่ง; เติมยาง MH.1,MH.2 01-02/08); เพิ่มแผน 03/08 (ยังไม่ยืนยัน, บ่อใหม่ MH.23)",
+  "records": [
+    {"iso": "2569-07-31", "text": "1. สกัดพื้นและเปลี่ยนฝาบ่อ MH.24", "wells": ["MH.24"], "unconfirmed": false, "holiday": false, "reportUrl": "https://drive.google.com/file/d/1Dd96aMXy3XnjrLM2R0yTlKdHIEpBZrz3/view"},
+    {"iso": "2569-08-01", "text": "1. Test Pit บ่อ MH.24\n2. เติมยาง MH.1 และ MH.2", "wells": ["MH.24", "MH.1", "MH.2"], "unconfirmed": false, "holiday": false, "reportUrl": "https://drive.google.com/file/d/1Hkov80sEibCmzLM4PQDd01cFHstLep1K/view"},
+    {"iso": "2569-08-02", "text": "1. ตัด Joint กำหนดตำแหน่งฝาบ่อ MH.24\n2. เติมยาง MH.1 และ MH.2", "wells": ["MH.24", "MH.1", "MH.2"], "unconfirmed": false, "holiday": false, "reportUrl": "https://drive.google.com/file/d/1WEBy9TM6s6lwWP6KbO_qniD3VEATJmDy/view"},
+    {"iso": "2569-08-03", "text": "1. ตัด Joint กำหนดตำแหน่งฝาบ่อ MH.23", "wells": ["MH.23"], "unconfirmed": true, "holiday": false, "reportUrl": "https://drive.google.com/file/d/1Fhp22_2Lj6-FFMs5wiI5mUHuq03QFJH9/view"}
+  ],
+  "curated": {
+    "MH.24": [
+      {"date": "02/08/2569", "text": "1. ตัด Joint กำหนดตำแหน่งฝาบ่อ MH.24", "stage": "เตรียมการ"},
+      {"date": "01/08/2569", "text": "1. Test Pit บ่อ MH.24", "stage": "สำรวจ"},
+      {"date": "31/07/2569", "text": "1. สกัดพื้นและเปลี่ยนฝาบ่อ MH.24", "stage": "เตรียมการ"},
+      {"date": "30/07/2569", "text": "1. ตัด Joint กำหนดตำแหน่งฝาบ่อ MH.24", "stage": "เตรียมการ"}
+    ],
+    "MH.1": [
+      {"date": "02/08/2569", "text": "2. เติมยาง MH.1", "stage": "ปรับแต่ง"},
+      {"date": "01/08/2569", "text": "2. เติมยาง MH.1", "stage": "ปรับแต่ง"}
+    ],
+    "MH.2": [
+      {"date": "02/08/2569", "text": "2. เติมยาง MH.2", "stage": "ปรับแต่ง"},
+      {"date": "01/08/2569", "text": "2. เติมยาง MH.2", "stage": "ปรับแต่ง"}
+    ],
+    "MH.23": [
+      {"date": "03/08/2569 (แผน ยังไม่ยืนยัน)", "text": "1. ตัด Joint กำหนดตำแหน่งฝาบ่อ MH.23", "stage": "เตรียมการ"}
+    ]
+  }
+}
