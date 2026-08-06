@@ -1,0 +1,48 @@
+{
+  "note": "ยืนยันผล 03-05/08 (จากใบแจ้งฯ 04-06/08 ครึ่งล่าง); เพิ่มแผน 06/08 (unconfirmed). ตัดตาราง pipe-size สำเร็จรูปทิ้งตามกฎ boilerplate",
+  "records": [
+    { "iso": "2569-08-03",
+      "text": "1. ตัด Joint กำหนดตำแหน่งฝาบ่อ MH.23  2. เติมยาง MH.1 และ MH.2",
+      "wells": ["MH.23", "MH.1", "MH.2"],
+      "unconfirmed": false,
+      "holiday": false,
+      "reportUrl": "https://drive.google.com/file/d/1Fhp22_2Lj6-FFMs5wiI5mUHuq03QFJH9/view" },
+    { "iso": "2569-08-04",
+      "text": "1. สกัดพื้นถนน เปลี่ยนฝาบ่อ MH.23  2. เติมยาง MH.24",
+      "wells": ["MH.23", "MH.24"],
+      "unconfirmed": false,
+      "holiday": false,
+      "reportUrl": "https://drive.google.com/file/d/1DVEcTvOWmsnB5HvDYkGiZI54ON9-6Uby/view" },
+    { "iso": "2569-08-05",
+      "text": "1. Test Pit บ่อ MH.23",
+      "wells": ["MH.23"],
+      "unconfirmed": false,
+      "holiday": false,
+      "reportUrl": "https://drive.google.com/file/d/1Go9eFuz-GlyBGTa_uqXcEhJf0Esp8tei/view" },
+    { "iso": "2569-08-06",
+      "text": "1. ตัด Joint กำหนดตำแหน่งบ่อ MH.25",
+      "wells": ["MH.25"],
+      "unconfirmed": true,
+      "holiday": false,
+      "reportUrl": "https://drive.google.com/file/d/1j6IlwSrW9mkPUAd0eVtbjZRpXWQdLVaa/view" }
+  ],
+  "curated": {
+    "MH.23": [
+      {"date":"05/08/2569","text":"Test Pit บ่อ MH.23","stage":"Test Pit"},
+      {"date":"04/08/2569","text":"สกัดพื้นถนน เปลี่ยนฝาบ่อ","stage":"เปลี่ยนฝาบ่อ"},
+      {"date":"03/08/2569","text":"ตัด Joint กำหนดตำแหน่งฝาบ่อ","stage":"ตัด Joint"}
+    ],
+    "MH.24": [
+      {"date":"04/08/2569","text":"เติมยาง","stage":"เติมยาง"}
+    ],
+    "MH.1": [
+      {"date":"03/08/2569","text":"เติมยาง (ในท่อปลอก)","stage":"เติมยาง"}
+    ],
+    "MH.2": [
+      {"date":"03/08/2569","text":"เติมยาง (ในท่อปลอก)","stage":"เติมยาง"}
+    ]
+  },
+  "wellStatus": {
+    "MH.23": "testpit"
+  }
+}
