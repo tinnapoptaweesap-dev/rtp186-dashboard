@@ -1,0 +1,65 @@
+{
+  "note": "อัพเดต 186: ประมวลผล Daily Report 7,8,9,10,11 ส.ค. 2569 — ยืนยันผลงานจริง 6-10 ส.ค. (MH.25 ตัด Joint, MH.23 เตรียมเหล็ก+เข้าแบบเทคอนกรีต Guide Wall 2 ด้าน), แผนงาน 11 ส.ค. (รอแบบ+ปรับระดับฝาบ่อ MH.23) ยังไม่ยืนยัน",
+  "records": [
+    {
+      "iso": "2569-08-06",
+      "text": "1. ตัด Joint กำหนดตำแหน่งบ่อ MH.25",
+      "wells": ["MH.25"],
+      "unconfirmed": false,
+      "holiday": false
+    },
+    {
+      "iso": "2569-08-07",
+      "text": "1. เตรียมงานภายในแคมป์",
+      "wells": [],
+      "unconfirmed": false,
+      "holiday": false,
+      "reportUrl": "https://drive.google.com/file/d/12FQbq1NY7KIrla0zC8MMUhMqwMFdKYL8/view"
+    },
+    {
+      "iso": "2569-08-08",
+      "text": "1. เตรียมเหล็ก Guide Wall MH.23",
+      "wells": ["MH.23"],
+      "unconfirmed": false,
+      "holiday": false,
+      "reportUrl": "https://drive.google.com/file/d/1YkU2l8lnbVUQmLRlWJqnhqXUppofUmEf/view"
+    },
+    {
+      "iso": "2569-08-09",
+      "text": "1. เข้าแบบและเทคอนกรีต Guide Wall บ่อ MH.23 (ด้าน 2/4)",
+      "wells": ["MH.23"],
+      "unconfirmed": false,
+      "holiday": false,
+      "reportUrl": "https://drive.google.com/file/d/1FbLOES7XW9JSLSSSrFfBL0fJcLa68U8x/view"
+    },
+    {
+      "iso": "2569-08-10",
+      "text": "1. เข้าแบบและเทคอนกรีต Guide Wall บ่อ MH.23 (ด้าน 4/4)",
+      "wells": ["MH.23"],
+      "unconfirmed": false,
+      "holiday": false,
+      "reportUrl": "https://drive.google.com/file/d/1nff-UyEqB-SqiI4Vtmp4NNFuuw-ASTU2/view"
+    },
+    {
+      "iso": "2569-08-11",
+      "text": "1. รอแบบ Guide Wall และปรับระดับฝาบ่อ MH.23",
+      "wells": ["MH.23"],
+      "unconfirmed": true,
+      "holiday": false,
+      "reportUrl": "https://drive.google.com/file/d/1fq-J3xGMX6yEEJ8PfX541Ut1z0pG2Kph/view"
+    }
+  ],
+  "curated": {
+    "MH.25": [
+      {"date": "06/08/2569", "text": "ตัด Joint กำหนดตำแหน่งบ่อ MH.25", "stage": "ตัด Joint"}
+    ],
+    "MH.23": [
+      {"date": "10/08/2569", "text": "เข้าแบบและเทคอนกรีต Guide Wall บ่อ MH.23 (ด้าน 4/4)", "stage": "เข้าแบบ-เทคอนกรีต Guide Wall"},
+      {"date": "09/08/2569", "text": "เข้าแบบและเทคอนกรีต Guide Wall บ่อ MH.23 (ด้าน 2/4)", "stage": "เข้าแบบ-เทคอนกรีต Guide Wall"},
+      {"date": "08/08/2569", "text": "เตรียมเหล็ก Guide Wall MH.23", "stage": "เตรียมเหล็ก Guide Wall"}
+    ]
+  },
+  "wellStatus": {
+    "MH.23": "progress"
+  }
+}
