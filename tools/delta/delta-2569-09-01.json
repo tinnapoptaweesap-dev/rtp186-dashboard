@@ -1,0 +1,53 @@
+{
+  "confirmed": "31 สิงหาคม 2569",
+  "note": "confirm 29-31/08 (MH.24 caisson L3-5, MH.24 caisson L6-7, MH.10 ปรับระดับเปลี่ยนฝา, MH.1/MH.2 เติมยางมะตอย); add 01/09 plan (unconfirmed, MH.9 & MH.25 ปรับระดับเปลี่ยนฝา)",
+  "records": [
+    {
+      "iso": "2569-08-29",
+      "text": "1. จมบ่อพัก ชั้นที่ 3, 4 และ 5 บ่อ MH.24",
+      "wells": ["MH.24"],
+      "unconfirmed": false,
+      "holiday": false,
+      "reportUrl": "https://drive.google.com/file/d/1kdma84jWJQBaEDdNIvXtA5A5SDZzb4zK/view"
+    },
+    {
+      "iso": "2569-08-30",
+      "text": "1. จมบ่อพัก ชั้นที่ 6 และ 7 บ่อ MH.24",
+      "wells": ["MH.24"],
+      "unconfirmed": false,
+      "holiday": false,
+      "reportUrl": "https://drive.google.com/file/d/1IC0qaepTV0eCb-WndHpOYN-8vpF020Dl/view"
+    },
+    {
+      "iso": "2569-08-31",
+      "text": "1. ปรับระดับเปลี่ยนฝาบ่อ MH.10\n2. เติมยางมะตอยบ่อ MH.1, MH.2",
+      "wells": ["MH.10", "MH.1", "MH.2"],
+      "unconfirmed": false,
+      "holiday": false,
+      "reportUrl": "https://drive.google.com/file/d/1lHLEsZGBx_KeI9lp1Ub6SJ1-Aav4g347/view"
+    },
+    {
+      "iso": "2569-09-01",
+      "text": "1. ปรับระดับเปลี่ยนฝาบ่อ MH.9 และ MH.25",
+      "wells": ["MH.9", "MH.25"],
+      "unconfirmed": true,
+      "holiday": false,
+      "reportUrl": "https://drive.google.com/file/d/1lHLEsZGBx_KeI9lp1Ub6SJ1-Aav4g347/view"
+    }
+  ],
+  "curated": {
+    "MH.24": [
+      {"date": "29/08/2569", "text": "จมบ่อพัก ชั้นที่ 3-5 บ่อ MH.24", "stage": "จมบ่อพัก"},
+      {"date": "30/08/2569", "text": "จมบ่อพัก ชั้นที่ 6-7 บ่อ MH.24", "stage": "จมบ่อพัก"}
+    ],
+    "MH.10": [
+      {"date": "31/08/2569", "text": "ปรับระดับเปลี่ยนฝาบ่อ MH.10", "stage": "ปรับแต่ง"}
+    ],
+    "MH.1": [
+      {"date": "31/08/2569", "text": "เติมยางมะตอยบ่อ MH.1, MH.2", "stage": "เติมยาง"}
+    ],
+    "MH.2": [
+      {"date": "31/08/2569", "text": "เติมยางมะตอยบ่อ MH.1, MH.2", "stage": "เติมยาง"}
+    ]
+  }
+}
