@@ -1,0 +1,38 @@
+{
+  "confirmed": "14 ตุลาคม 2569",
+  "note": "อัพเดตผลงาน 6–14 ต.ค. (ยืนยันจากใบรายงาน 7–15 ต.ค.) + แผน 15 ต.ค.; ยืนยัน 6 ต.ค. แทนแผนเดิม; MH.17 testpit→progress (เข้าแบบ Guide Wall 9 ต.ค.)",
+  "records": [
+    {"iso":"2569-10-06","text":"1. สกัดพื้นและเปลี่ยนฝาบ่อ MH.17 2. ติดตั้งอุปกรณ์งานดันท่อ MH.11 (ในท่อปลอก 600 มม.)","wells":["MH.17","MH.11"],"unconfirmed":false,"holiday":false,"reportUrl":"https://drive.google.com/file/d/1EVGl92-YpGGdSsXH064OG-aypAuprJRL/view"},
+    {"iso":"2569-10-07","text":"1. สกัดพื้นคอนกรีตชั้น 2 MH.17 2. ติดตั้งอุปกรณ์งานดันท่อ MH.11 (ในท่อปลอก 600 มม.)","wells":["MH.17","MH.11"],"unconfirmed":false,"holiday":false,"reportUrl":"https://drive.google.com/file/d/1OrDmHwSh43pdifDqu1fZ3C68MxfUGA8r/view"},
+    {"iso":"2569-10-08","text":"1. ผูกเหล็ก Guide Wall MH.17 2. ติดตั้งอุปกรณ์งานดันท่อ MH.11 (ในท่อปลอก 600 มม.) 3. ปรับระดับฝาบ่อ MH.9","wells":["MH.17","MH.11","MH.9"],"unconfirmed":false,"holiday":false,"reportUrl":"https://drive.google.com/file/d/1IyzsJN5Z035uSoWbn57_lhquk6YVtBqN/view"},
+    {"iso":"2569-10-09","text":"1. เข้าแบบ เทคอนกรีต Guide Wall (ด้าน 2/4) MH.17","wells":["MH.17"],"unconfirmed":false,"holiday":false,"reportUrl":"https://drive.google.com/file/d/15mM1cCFxUFUmjeLAIco64iRzBCqHp-hO/view"},
+    {"iso":"2569-10-10","text":"1. เข้าแบบ เทคอนกรีต Guide Wall (ด้าน 4/4) MH.17","wells":["MH.17"],"unconfirmed":false,"holiday":false,"reportUrl":"https://drive.google.com/file/d/1PR2zVakO-2NlWPBb2FMq0RB50ha6QGG0/view"},
+    {"iso":"2569-10-11","text":"1. รอแบบ วางเหล็ก H-Beam และปรับระดับฝาบ่อ MH.17","wells":["MH.17"],"unconfirmed":false,"holiday":false,"reportUrl":"https://drive.google.com/file/d/1hUlVUjhpbbctsOK4Sa3_c10t49mBrzeH/view"},
+    {"iso":"2569-10-12","text":"1. จมบ่อพักชิ้นงานที่ 1-2 MH.17","wells":["MH.17"],"unconfirmed":false,"holiday":false,"reportUrl":"https://drive.google.com/file/d/1d-xfANCogCtYMsisVE5R6luDgK_rJfZB/view"},
+    {"iso":"2569-10-13","text":"วันหยุดนักขัตฤกษ์","wells":[],"unconfirmed":false,"holiday":true,"reportUrl":"https://drive.google.com/file/d/1vOfOqO0BZkty8ooFcd-zXN6axicvEYrH/view"},
+    {"iso":"2569-10-14","text":"1. จมบ่อพักชิ้นงานที่ 3, 4 และ 5 MH.17","wells":["MH.17"],"unconfirmed":false,"holiday":false,"reportUrl":"https://drive.google.com/file/d/1Pa9nd2AvpNvDI2ME-aZCIj3loWrMY45x/view"},
+    {"iso":"2569-10-15","text":"1. จมบ่อพักชิ้นงานที่ 6, 7 และ 8 MH.17","wells":["MH.17"],"unconfirmed":true,"holiday":false,"reportUrl":"https://drive.google.com/file/d/1Pa9nd2AvpNvDI2ME-aZCIj3loWrMY45x/view"}
+  ],
+  "curated": {
+    "MH.17": [
+      {"date":"15/10/2569 (แผน ยังไม่ยืนยัน)","text":"จมบ่อพักชิ้นงานที่ 6, 7 และ 8 MH.17","stage":"จมบ่อพัก"},
+      {"date":"14/10/2569","text":"จมบ่อพักชิ้นงานที่ 3, 4 และ 5 MH.17","stage":"จมบ่อพัก"},
+      {"date":"12/10/2569","text":"จมบ่อพักชิ้นงานที่ 1-2 MH.17","stage":"จมบ่อพัก"},
+      {"date":"11/10/2569","text":"รอแบบ วางเหล็ก H-Beam และปรับระดับฝาบ่อ MH.17","stage":"รอแบบ"},
+      {"date":"10/10/2569","text":"เข้าแบบ เทคอนกรีต Guide Wall (ด้าน 4/4) MH.17","stage":"เข้าแบบ-เทคอนกรีต Guide Wall"},
+      {"date":"09/10/2569","text":"เข้าแบบ เทคอนกรีต Guide Wall (ด้าน 2/4) MH.17","stage":"เข้าแบบ-เทคอนกรีต Guide Wall"},
+      {"date":"08/10/2569","text":"ผูกเหล็ก Guide Wall MH.17","stage":"เตรียมเหล็ก Guide Wall"},
+      {"date":"07/10/2569","text":"สกัดพื้นคอนกรีตชั้น 2 MH.17","stage":"เปลี่ยนฝาบ่อ"},
+      {"date":"06/10/2569","text":"สกัดพื้นและเปลี่ยนฝาบ่อ MH.17","stage":"เปลี่ยนฝาบ่อ"}
+    ],
+    "MH.11": [
+      {"date":"08/10/2569","text":"ติดตั้งอุปกรณ์งานดันท่อ MH.11 (ในท่อปลอก 600 มม.)","stage":"เตรียมการ"},
+      {"date":"07/10/2569","text":"ติดตั้งอุปกรณ์งานดันท่อ MH.11 (ในท่อปลอก 600 มม.)","stage":"เตรียมการ"},
+      {"date":"06/10/2569","text":"ติดตั้งอุปกรณ์งานดันท่อ MH.11 (ในท่อปลอก 600 มม.)","stage":"เตรียมการ"}
+    ],
+    "MH.9": [
+      {"date":"08/10/2569","text":"ปรับระดับฝาบ่อ MH.9","stage":"ปรับแต่ง"}
+    ]
+  },
+  "wellStatus": {"MH.17": "progress"}
+}
