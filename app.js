@@ -104,10 +104,19 @@ function renderHeroMeta(){
 /* ---------------------------------------------------------
    Alignment strip (signature visual)
 --------------------------------------------------------- */
-// สถานะช่วงดันท่อ (override รายช่วง key = บ่อต้นทาง) — default "none" เพราะงานดันท่อยังไม่เริ่ม
-function segStatus(fromW){
-  return (DATA.segmentStatus && DATA.segmentStatus[fromW]) || "none";
+// สถานะช่วงดันท่อ (key = บ่อต้นทางตามลำดับในผัง) — ค่าเป็น object ความคืบหน้า
+// { from, to, dir:"fwd"|"rev", done, total, asOf }  dir="rev" = ดันจากบ่อปลายทางย้อนมาทางต้นทาง (เช่น MH.11→MH.10)
+// ไม่มี record = ยังไม่เริ่มดันท่อ
+function segProg(fromW){
+  const s = DATA.segmentStatus && DATA.segmentStatus[fromW];
+  return (s && typeof s === "object" && s.total > 0) ? s : null;
 }
+function segStatus(fromW){
+  const s = segProg(fromW);
+  if(!s) return "none";
+  return s.done >= s.total ? "complete" : (s.done > 0 ? "progress" : "early");
+}
+function fmtM(n){ return Number.isInteger(n) ? String(n) : n.toFixed(1); }
 
 function renderAlignmentStrip(){
   const svg = document.getElementById("alignmentSvg");
@@ -151,11 +160,24 @@ function renderAlignmentStrip(){
   for(let i=0;i<net.main.length-1;i++){
     const a=net.main[i], b=net.main[i+1];
     const x1=X[a.w]+sq/2+3, x2=X[b.w]-sq/2-3;
-    const color=stageColor(segStatus(a.w));
+    const sp=segProg(a.w);
+    const color=sp ? "var(--grey)" : stageColor(segStatus(a.w));   // เส้นฐาน (ระยะออกแบบ) = เทา เมื่อมีผลงานดันท่อจะวาดทับด้วยแถบความคืบหน้า
     const isSCP=a.pipe==="scp";
-    html += `<line x1="${x1}" y1="${yMain}" x2="${x2}" y2="${yMain}" stroke="${color}" stroke-width="${pipeTh}"><title>${a.w} → ${b.w} · ${isSCP?'SCP':'RCP'} · ดันท่อลอด ${a.distTo} ม. · ${stageLabel(segStatus(a.w))}</title></line>`;
+    const tip = sp
+      ? `${sp.from} → ${sp.to} · ${isSCP?'SCP':'RCP'} · ดันท่อลอด ${fmtM(sp.total)} ม. · ดันแล้ว ${fmtM(sp.done)} ม. (${(sp.done/sp.total*100).toFixed(1)}%) · ณ ${sp.asOfLabel||sp.asOf||""}`
+      : `${a.w} → ${b.w} · ${isSCP?'SCP':'RCP'} · ดันท่อลอด ${a.distTo} ม. · ยังไม่เริ่มดันท่อ`;
+    html += `<line x1="${x1}" y1="${yMain}" x2="${x2}" y2="${yMain}" stroke="${color}" stroke-width="${pipeTh}"><title>${tip}</title></line>`;
     const mx=(X[a.w]+X[b.w])/2;
-    html += `<text x="${mx}" y="${yMain+24}" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="var(--ink-soft)">${a.distTo}</text>`;
+    if(sp){
+      const frac=Math.min(1, sp.done/sp.total), len=(x2-x1)*frac, rev=sp.dir==="rev";
+      const xs=rev?x2:x1, xe=rev?x2-len:x1+len;
+      const jc=frac>=1?"var(--green)":"var(--amber)";
+      html += `<line x1="${xs}" y1="${yMain}" x2="${xe}" y2="${yMain}" stroke="${jc}" stroke-width="7" stroke-linecap="butt"><title>${tip}</title></line>`;
+      if(frac<1){ const d=rev?-1:1;   // หัวเจาะ (ลูกศรชี้ทิศดัน)
+        html += `<path d="M${xe} ${yMain-6} L${xe+d*8} ${yMain} L${xe} ${yMain+6} Z" fill="${jc}"><title>หัวเจาะ · ${tip}</title></path>`; }
+      html += `<text x="${mx}" y="${yMain+38}" text-anchor="middle" font-family="IBM Plex Sans Thai" font-size="9" fill="var(--amber)" font-weight="700">ดันแล้ว ${fmtM(sp.done)}/${fmtM(sp.total)} ม. (${(sp.done/sp.total*100).toFixed(1)}%)</text>`;
+    }
+    html += `<text x="${mx}" y="${yMain+24}" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="var(--ink-soft)">${sp?fmtM(sp.total):a.distTo}</text>`;
     if(isSCP) html += `<text x="${mx}" y="${yMain-9}" text-anchor="middle" font-family="IBM Plex Mono" font-size="7.5" fill="${SCP}" font-weight="700">SCP</text>`;
   }
 
